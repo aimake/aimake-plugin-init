@@ -1,0 +1,13 @@
+{
+  "extends": "aimake/es6",
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+  },
+  "rules": {
+    "no-console": 0,
+    "global-require": 0,
+    "import/no-dynamic-require": 0
+  }
+}

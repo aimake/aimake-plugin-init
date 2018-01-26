@@ -1,0 +1,2 @@
+aimake link
+aimake init
