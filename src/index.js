@@ -87,7 +87,7 @@ async function run(inputDest) {
 
   console.log('项目生成完成，正在安装依赖');
   shell.cd(dest);
-  shell.exec('yarn install -d');
+  shell.exec('yarn install --dev');
 
   process.exit(0);
 }
