@@ -35,12 +35,12 @@ function isSafeDest(dest) {
 exports.getDest = async function getDest(_inputDest) {
   let inputDest = _inputDest;
   if (!inputDest) {
-    inputDest = await ask('请输入项目目录路径（默认为当前目录）: ') || '.';
+    inputDest = await ask('Please enter the project directory path（Default is the current directory）: ') || '.';
   }
   const dest = path.resolve(CWD, inputDest);
 
   if (!isSafeDest(dest)) {
-    console.log(`${dest} 文件已存在或不为空目录`.red);
+    console.log(`Files ${dest} already exist or are not empty directories`.red);
     process.exit(1);
   }
 

@@ -29,7 +29,7 @@ function $request(url) {
 }
 
 // 获取某个包的最新信息
-const NPM_MODULE_LATEST = compile('http://registry.npmjs.com/{{ name }}/latest');
+const NPM_MODULE_LATEST = compile('http://registry.npm.alibaba-inc.com/{{ name }}/latest');
 
 /**
  * 获取npm包的最新信息

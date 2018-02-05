@@ -1,7 +1,7 @@
 {
   "name": "aimake-plugin-init",
   "version": "0.0.2",
-  "main": "./lib/index.js",
+  "main": "index.js",
   "description": "AiMake init plugin.",
   "license": "MIT",
   "engines": {

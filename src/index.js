@@ -4,12 +4,12 @@ import path from 'path';
 import inquirer from 'inquirer';
 import shell from 'shelljs';
 import util from './util';
-import yarn from './yarn';
+import npm from './npm';
 
 const getDest = util.getDest;
 const copy = util.copy;
-const getModuleConfig = yarn.getModuleConfig;
-const downloadModuleAndUnzip = yarn.downloadModuleAndUnzip;
+const getModuleConfig = npm.getModuleConfig;
+const downloadModuleAndUnzip = npm.downloadModuleAndUnzip;
 const TMP_DIR = path.join(os.tmpdir(), 'aimake-cli-init-tmp');
 
 /**
@@ -37,15 +37,15 @@ function replacer(_file, _answers) {
 
 async function run(inputDest) {
   const dest = await getDest(inputDest);
-  console.log(`项目目录为 ${dest.green}`);
+  console.log(`The project directory is ${dest.green}`);
 
-  console.log('正在获取项目类型列表');
+  console.log('Getting a list of project types');
   const projects = (await getModuleConfig('aimake-cli-config')).projects;
   const answers = await inquirer.prompt([
     {
       name: 'initType',
       type: 'list',
-      message: '请选择项目类型',
+      message: 'Please select the project type',
       choices: projects.map(item => ({
         name: item.description,
         value: item.name,
@@ -54,29 +54,29 @@ async function run(inputDest) {
     {
       name: 'name',
       type: 'input',
-      message: '请输入项目名',
+      message: 'Please enter the project name',
       default: path.basename(dest),
     },
     {
       name: 'version',
       type: 'input',
-      message: '请输入项目版本号',
+      message: 'Please enter the project version number',
       default: '1.0.0',
     },
     {
       name: 'author',
       type: 'input',
-      message: '请输入项目作者',
+      message: 'Please enter the project author',
       default: process.env.USER || process.env.USERNAME || '',
     },
   ]);
 
-  console.log('正在下载项目文件');
+  console.log('Downloading project files ...');
   shell.rm('-rf', TMP_DIR);
   const config = await getModuleConfig(answers.initType);
   await downloadModuleAndUnzip(config.dist.tarball);
 
-  console.log('正在生成项目');
+  console.log('Project is being generated ...');
   try {
     await copy(TMP_DIR, dest, (file) => {
       replacer(file, answers);
@@ -85,9 +85,9 @@ async function run(inputDest) {
     console.log(e);
   }
 
-  console.log('项目生成完成，正在安装依赖');
+  console.log('Project generation completion, installation dependence ...');
   shell.cd(dest);
-  shell.exec('yarn install --dev');
+  shell.exec('npm install -d');
 
   process.exit(0);
 }
