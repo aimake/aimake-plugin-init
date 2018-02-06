@@ -1,6 +1,6 @@
 {
   "name": "aimake-plugin-init",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "main": "index.js",
   "description": "AiMake init plugin.",
   "license": "MIT",
@@ -20,7 +20,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^4.16.0",
-    "eslint-config-aimake": "^0.0.1"
+    "eslint-config-aimake": "latest"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
